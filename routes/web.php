@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +62,17 @@ Route::get('/', function () {
 //     return 'Nama saya ' . $name;
 // });
 
-// Soal 7
-Route::get('/user/profile', function () {
-})->name('profile');
+// // Soal 7
+// Route::get('/user/profile', function () {
+// })->name('profile');
+
+// CONTROLLER
+Route::get('/hello', [WelcomeController::class, 'hello']);
+Route::get('/', [PageController::class, 'index']);
+Route::get('/about', [PageController::class, 'about']);
+Route::get('/articles/{id}', [PageController::class, 'articles']);
+
+// Photo Controller
+Route::resource('photos', PhotoController::class);
+Route::resource('photos', PhotoController::class)->only(['index', 'show']);
+Route::resource('photos', PhotoController::class)->except(['create', 'store', 'update', 'destroy']);
